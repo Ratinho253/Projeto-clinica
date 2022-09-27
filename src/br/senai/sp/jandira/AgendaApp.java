@@ -25,6 +25,12 @@ public class AgendaApp {
 		planoDeSaude.setNumero("854-127-783-98");
 		planoDeSaude.setValidade(LocalDate.of(2023, 8, 20));
 		
+		PlanoDeSaude planoDeSaude2 = new PlanoDeSaude();
+		planoDeSaude2.setOperador("Unimed");
+		planoDeSaude2.setCategoria("bronze");
+		planoDeSaude2.setNumero("854-127-783-98");
+		planoDeSaude2.setValidade(LocalDate.of(2023, 8, 20));
+		
 //		criar um objeto endereço
 		
 		Endereco endereco = new Endereco();
@@ -56,7 +62,7 @@ public class AgendaApp {
 		paciente2.setDataDeNascimento(LocalDate.of(2022, 7, 9));
 		
 		
-//		exibir os dado do paciente
+////		exibir os dado do paciente
 		
 		System.out.println("nome do Paciente:" + paciente.getNome());
 		System.out.println("Telefone do paciente:" + paciente.getTelefone());
@@ -66,25 +72,25 @@ public class AgendaApp {
 		System.out.println("Estado do paciente:" + paciente.getEndereco().getEstado());
 		
 		
-//		criar especialidades
+////		criar especialidades
 		
 		Especialidade especialidade1 = new Especialidade();
 		especialidade1.setNome("cirurgião");
-		especialidade1.setDecricao("profissional em fazer cirurgia");
+		especialidade1.setDescricao("profissional em fazer cirurgia");
 		
 
 		Especialidade especialidade2 = new Especialidade();
 		especialidade2.setNome("Cardiovascular");
-		especialidade2.setDecricao("profissional na area do coração");
+		especialidade2.setDescricao("profissional na area do coração");
 		
 
 		Especialidade especialidade3 = new Especialidade();
 		especialidade3.setNome("cirurgião de olho");
-		especialidade3.setDecricao("profissional em fazer cirurgia no seu olho");
+		especialidade3.setDescricao("profissional em fazer cirurgia no seu olho");
 		
 		Especialidade especialidade4 = new Especialidade();
 		especialidade4.setNome("Clinico geral");
-		especialidade4.setDecricao("profissional em fazer de tudo ");
+		especialidade4.setDescricao("profissional em fazer de tudo ");
 		
 		
 		System.out.println(".............................................................");

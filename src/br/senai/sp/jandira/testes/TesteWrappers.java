@@ -18,30 +18,30 @@ public class TesteWrappers {
 		
 		Especialidade e1 = new Especialidade("Cardiologia");
 		e1.setNome("cardiologia");
-		e1.setDecricao("não deixa ter um ataque");
+		e1.setDescricao("não deixa ter um ataque");
 		
 		Especialidade e2 = new Especialidade("Gastroenteologia");
 		e2.setNome("Gastroenteologia");
-		e2.setDecricao("Não deixa ficar com dor de barriga");
+		e2.setDescricao("Não deixa ficar com dor de barriga");
 		
 		especialidades.add(e1);
 		especialidades.add(e2);
 		
 		Especialidade e3 = new Especialidade("Fisioterapeuta");
 		e3.setNome("Fisioterapia");
-		e3.setDecricao("Cuida do seus ossos");
+		e3.setDescricao("Cuida do seus ossos");
 		
 		especialidades.add(e3);
 		
 		Especialidade e4 = new Especialidade("Pediatria");
 		e4.setNome("Pediatria");
-		e4.setDecricao("Cuida da saude do seu filho");
+		e4.setDescricao("Cuida da saude do seu filho");
 		
 		Especialidade[] epecialidades = {e1,e2,e3,e4};
 		
 		Especialidade e5 = new Especialidade("Clinico");
 		e5.setNome("Clinico");
-		e5.setDecricao("serve para tudo");
+		e5.setDescricao("serve para tudo");
 		
 //		especialidades[4] = e5;
 		
@@ -74,6 +74,7 @@ public class TesteWrappers {
 		System.out.println(nova.getNome());
 		
 		
+		Especialidade xy = new Especialidade();		
 		
 	
 

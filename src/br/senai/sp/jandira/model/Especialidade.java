@@ -15,7 +15,8 @@ public class Especialidade {
 	}
 	
 	public Especialidade(String nome, String descricao) {
-		
+		this.nome = nome;
+		this.descricao = descricao;
 		
 	}
 	
@@ -38,7 +39,7 @@ public class Especialidade {
 	public String getNome() {
 		return nome;
 	}
-	public void setDecricao(String descricao) {
+	public void setDescricao(String descricao) {
 		if(descricao.length() >=10) {
 			this.descricao = descricao;
 		}else {
