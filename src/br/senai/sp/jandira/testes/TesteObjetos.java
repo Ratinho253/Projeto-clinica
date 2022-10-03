@@ -3,27 +3,70 @@ package br.senai.sp.jandira.testes;
 import java.util.ArrayList;
 
 import br.senai.sp.jandira.AgendaApp;
+import br.senai.sp.jandira.dao.EspecialodadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 
 public class TesteObjetos {
 
     public static void main(String[] args) {
+        
+        
+                
         Especialidade e1 = new Especialidade("Cardiologia");
         e1.setNome("cardiologia");
         e1.setDescricao("não deixa ter um ataque");
+        
+        EspecialodadeDAO.gravar(e1);
+        
+        
 
         Especialidade e2 = new Especialidade("Gastroenteologia");
         e2.setNome("Gastroenteologia");
         e2.setDescricao("Não deixa ficar com dor de barriga");
+        
+        EspecialodadeDAO.gravar(e2);
 
+        
+        
         Especialidade e4 = new Especialidade("Otorrino", "Cuida do ouvido");
+        EspecialodadeDAO.gravar(e4);
 
         Especialidade e3 = new Especialidade("Gastroenteologia");
         e3.setNome("Qualquer coisa");
+        EspecialodadeDAO.gravar(e3);
         
         Especialidade e5 = new Especialidade("5");
         e5.setNome("Especialidade 5");
+        EspecialodadeDAO.gravar(e5);
+        
+        
+        
+        for (Especialidade ee : EspecialodadeDAO.getEspscialidades()){
+            System.out.println("--------------" + ee.getNome());
+        }
+        
+        System.out.println("-----------------------------------================");
+        
+        EspecialodadeDAO.excluir(101);
+        
+        for (Especialidade ee : EspecialodadeDAO.getEspscialidades()){
+            System.out.println("--------------" + ee.getNome());
+        }
+        
+        
+        Especialidade procurada = EspecialodadeDAO.getEspecialidade(102);
+        System.out.println(procurada.getNome());
+        
+        System.out.println("-------------------up-----------------------");
+        Especialidade  especialidadeAtualizada = new Especialidade();
+        especialidadeAtualizada.setCodigo(102);
+        especialidadeAtualizada.setNome("Otorrinolarigologia");
+        especialidadeAtualizada.setDescricao("Essa é a nova descrição");
+        EspecialodadeDAO.atualizar(especialidadeAtualizada);
+        
+        System.out.println("_______________________up________________________");
+        
         
         System.out.println("Total:"+e1.getContador());
         System.out.println(e1.getCodigo() + "---" + e1.getNome());
