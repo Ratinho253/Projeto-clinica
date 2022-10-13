@@ -2,6 +2,7 @@ package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Especialidade;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EspecialodadeDAO {
@@ -13,6 +14,7 @@ public class EspecialodadeDAO {
 
     public static void gravar(Especialidade e) {
         especialidades.add(e);
+        
 
     }
 
@@ -46,7 +48,7 @@ public class EspecialodadeDAO {
     public static void excluir(Integer codigo) {
         for (Especialidade e : especialidades) {
             if (e.getCodigo() == codigo) {
-                especialidades.remove(e);
+                especialidades.remove(e);          
                 break;
             }
 
