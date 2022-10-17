@@ -24,6 +24,10 @@ public class Especialidade {
     }
 
     public Especialidade() {
+        gerarCodigo();
+    }
+    
+    public void gerarCodigo(){
         this.contador++;
         this.codigo = contador;
     }
@@ -34,10 +38,13 @@ public class Especialidade {
         return codigo;
     }
 
+    public void setCodigoo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
-    
     
     
 

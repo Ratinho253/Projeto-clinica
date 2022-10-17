@@ -5,6 +5,7 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialodadeDAO;
+import br.senai.sp.jandira.model.Especialidade;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,15 +16,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PaneleEspecialidades extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PaneleEspecialidades
-     */
+    private int linha;
+
     public PaneleEspecialidades() {
         initComponents();
         EspecialodadeDAO.criarListaDeEspecialidades();
-        
+
         preencherTabela();
-        
+
+    }
+
+    private int getLinha() {
+        linha = tableEspecialidade.getSelectedRow();
+        return linha;
     }
 
     /**
@@ -93,12 +98,10 @@ public class PaneleEspecialidades extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirEspecialidadeActionPerformed
-       
-        int linha = tableEspecialidade.getSelectedRow();  
-        
-        if(linha != -1){
+
+        if (getLinha() != -1) {
             excluirEspecialidade(linha);
-        } else{
+        } else {
             JOptionPane.showMessageDialog(
                     this,
                     "Por favor, selecione a especialidade que vc deseja exluir",
@@ -107,24 +110,52 @@ public class PaneleEspecialidades extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonExcluirEspecialidadeActionPerformed
 
-    private void excluirEspecialidade(int linha){
-        String codiStr = tableEspecialidade.getValueAt(linha, 0).toString();
-        Integer codigo = Integer.valueOf(codiStr);
-        
+    private void excluirEspecialidade(int linha) {
+
         int resposta = JOptionPane.showConfirmDialog(
                 this,
                 "Vc confirma a exclusão",
-                "Atenção", 
-                JOptionPane.YES_NO_OPTION, 
+                "Atenção",
+                JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
-        
-        EspecialodadeDAO.excluir(codigo);
-        
-        preencherTabela();
+
+        if (resposta == 0) {
+            EspecialodadeDAO.excluir(getCodigo());
+            preencherTabela(); 
+        }
+
 }
+         private Integer getCodigo(){
+        String codiStr = tableEspecialidade.getValueAt(getLinha(), 0).toString();
+        Integer codigo = Integer.valueOf(codiStr);
+        return codigo;
+    }
+
+private void editarEspecialidade(){
+
+              Especialidade especialidade =  EspecialodadeDAO.getEspecialidade(getCodigo());
+
+            EspecialidadeDialog especialidadeDialog = new EspecialidadeDialog(
+                       null, 
+                       true,
+                        especialidade);
+               especialidadeDialog.setVisible(true);
+               preencherTabela();
+        }
     
     private void buttonEditarEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarEspecialidadeActionPerformed
-
+               
+       if(getLinha() !=-1){
+           editarEspecialidade();
+       }else{
+           JOptionPane.showMessageDialog(
+                   this,
+                   "Por favor escolha uma especialidade de editação",
+                   "Especialidade",
+                   JOptionPane.WARNING_MESSAGE);
+       }
+        
+        
     }//GEN-LAST:event_buttonEditarEspecialidadeActionPerformed
 
     private void buttonNovoEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoEspecialidadeActionPerformed
@@ -156,7 +187,11 @@ public class PaneleEspecialidades extends javax.swing.JPanel {
     tableEspecialidade.getTableHeader().setReorderingAllowed(false);
     
     //bloquear alteração da tabela
-    tableEspecialidade.setDefaultEditor(Object.class, null);
+    tableEspecialidade
+
+.setDefaultEditor(Object.class  
+
+, null);
     
     
     tableEspecialidade.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

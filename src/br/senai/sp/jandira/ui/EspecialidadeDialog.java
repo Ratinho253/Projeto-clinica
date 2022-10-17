@@ -15,13 +15,41 @@ import javax.swing.JOptionPane;
  */
 public class EspecialidadeDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form EspecialidadeDialog
-     */
-    public EspecialidadeDialog(java.awt.Frame parent, boolean modal) {
+    
+  
+          Especialidade especialidade;
+    
+    public EspecialidadeDialog(
+            java.awt.Frame parent, 
+            boolean modal
+            ) {
+        
         super(parent, modal);
         initComponents();
     }
+    public EspecialidadeDialog(
+            java.awt.Frame parent, 
+            boolean modal,
+            Especialidade e) {
+        
+        super(parent, modal);
+        initComponents();
+        
+        especialidade = e ;
+        
+        preencherFormulario();
+        
+    }
+    
+    private void preencherFormulario(){
+        
+        tituloLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/editar.png")));
+        tituloLabel.setText("Especialidade - Editar");
+        codigoTextField.setText(especialidade.getCodigo().toString());
+        adicionarEspecialidadeTextField.setText(especialidade.getNome());
+        descricaoTextField.setText(especialidade.getDescricao());
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,7 +61,7 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         inicioPanel = new javax.swing.JPanel();
-        tituloLabel0 = new javax.swing.JLabel();
+        tituloLabel = new javax.swing.JLabel();
         detalhesPanel = new javax.swing.JPanel();
         descricaoLabel = new javax.swing.JLabel();
         descricaoTextField = new javax.swing.JTextField();
@@ -51,12 +79,12 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
         inicioPanel.setForeground(new java.awt.Color(51, 51, 255));
         inicioPanel.setLayout(null);
 
-        tituloLabel0.setFont(new java.awt.Font("Arial Black", 2, 24)); // NOI18N
-        tituloLabel0.setForeground(new java.awt.Color(51, 0, 255));
-        tituloLabel0.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/add.png"))); // NOI18N
-        tituloLabel0.setText("  Especialidade - ADICIONAR ");
-        inicioPanel.add(tituloLabel0);
-        tituloLabel0.setBounds(30, 30, 440, 50);
+        tituloLabel.setFont(new java.awt.Font("Arial Black", 2, 24)); // NOI18N
+        tituloLabel.setForeground(new java.awt.Color(51, 0, 255));
+        tituloLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/add.png"))); // NOI18N
+        tituloLabel.setText("  Especialidade - ADICIONAR ");
+        inicioPanel.add(tituloLabel);
+        tituloLabel.setBounds(30, 30, 440, 50);
 
         getContentPane().add(inicioPanel);
         inicioPanel.setBounds(0, 0, 550, 110);
@@ -152,12 +180,14 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_descricaoTextFieldActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-        //criar um objeto especialidade
-        Especialidade especialidade = new Especialidade();
-        especialidade.setNome(adicionarEspecialidadeTextField.getText());
-        especialidade.setDescricao(descricaoTextField.getText());
         
-        EspecialodadeDAO.gravar(especialidade);
+           //criar um objeto especialidade
+        
+        Especialidade novaEspecialidade = new Especialidade();
+        novaEspecialidade.setNome(adicionarEspecialidadeTextField.getText());
+        novaEspecialidade.setDescricao(descricaoTextField.getText());
+        
+        EspecialodadeDAO.gravar(novaEspecialidade);
         JOptionPane.showMessageDialog(this, "Especialidade gravada com sucesso"
                 , "Especialidade",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -218,6 +248,6 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
     private javax.swing.JTextField descricaoTextField;
     private javax.swing.JPanel detalhesPanel;
     private javax.swing.JPanel inicioPanel;
-    private javax.swing.JLabel tituloLabel0;
+    private javax.swing.JLabel tituloLabel;
     // End of variables declaration//GEN-END:variables
 }
