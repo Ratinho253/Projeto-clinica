@@ -14,11 +14,9 @@ public class EspecialodadeDAO {
 
     public static void gravar(Especialidade e) {
         especialidades.add(e);
-        
-
     }
 
-    public static ArrayList<Especialidade> getEspscialidades() {
+    public static ArrayList<Especialidade> getEspescialidades() {
         return especialidades;
     }
 
@@ -32,6 +30,7 @@ public class EspecialodadeDAO {
             i++;
         }
     }
+    
 
     public static Especialidade getEspecialidade(Integer codigo) {
         for (Especialidade e : especialidades) {

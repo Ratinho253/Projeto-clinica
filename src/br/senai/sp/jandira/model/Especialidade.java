@@ -14,6 +14,7 @@ public class Especialidade {
         this.nome = nome;
         this.contador++;
         this.codigo = contador;
+         gerarCodigo();
     }
 
     public Especialidade(String nome, String descricao) {
@@ -21,6 +22,7 @@ public class Especialidade {
         this.descricao = descricao;
         this.contador++;
         this.codigo = contador;
+         gerarCodigo();
     }
 
     public Especialidade() {
@@ -37,11 +39,7 @@ public class Especialidade {
     public Integer getCodigo() {
         return codigo;
     }
-
-    public void setCodigoo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
+    
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
