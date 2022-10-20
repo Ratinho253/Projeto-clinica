@@ -6,6 +6,7 @@ package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialodadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -138,7 +139,7 @@ private void editarEspecialidade(){
             EspecialidadeDialog especialidadeDialog = new EspecialidadeDialog(
                        null, 
                        true,
-                        especialidade);
+                        especialidade, OperacaoEnum.EDITAR);
                especialidadeDialog.setVisible(true);
                preencherTabela();
         }
@@ -159,7 +160,7 @@ private void editarEspecialidade(){
     }//GEN-LAST:event_buttonEditarEspecialidadeActionPerformed
 
     private void buttonNovoEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNovoEspecialidadeActionPerformed
-        EspecialidadeDialog especialidadeDialog = new EspecialidadeDialog(null, true);
+        EspecialidadeDialog especialidadeDialog = new EspecialidadeDialog(null, true, OperacaoEnum.ADICIONAR);
         especialidadeDialog.setVisible(true);
         
         preencherTabela();

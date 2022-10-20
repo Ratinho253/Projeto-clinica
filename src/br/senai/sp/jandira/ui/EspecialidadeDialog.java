@@ -6,6 +6,7 @@ package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialodadeDAO;
 import br.senai.sp.jandira.model.Especialidade;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import java.awt.TextField;
 import javax.swing.JOptionPane;
 
@@ -17,39 +18,57 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
 
     
   
-          Especialidade especialidade;
+          private Especialidade especialidade;
+          private OperacaoEnum operacao;
+          
     
     public EspecialidadeDialog(
             java.awt.Frame parent, 
-            boolean modal
+            boolean modal,
+            OperacaoEnum operacao
             ) {
         
         super(parent, modal);
         initComponents();
+        this.operacao = operacao;
+        preencherTitulo();
+        
     }
+    
     public EspecialidadeDialog(
             java.awt.Frame parent, 
             boolean modal,
-            Especialidade e) {
+            Especialidade e,
+            OperacaoEnum operacao) {
         
         super(parent, modal);
         initComponents();
         
         especialidade = e ;
+        this.operacao = operacao;
         
         preencherFormulario();
-        
+        preencherTitulo();
     }
     
     private void preencherFormulario(){
         
-        tituloLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/editar.png")));
-        tituloLabel.setText("Especialidade - Editar");
+       
+        
         codigoTextField.setText(especialidade.getCodigo().toString());
         adicionarEspecialidadeTextField.setText(especialidade.getNome());
         descricaoTextField.setText(especialidade.getDescricao());
     }
     
+    private void preencherTitulo(){
+        tituloLabel.setText("Especialidade - " + operacao);
+        
+        if(operacao == OperacaoEnum.EDITAR){
+            tituloLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/editar.png")));
+        } else{
+             tituloLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/add.png")));
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -168,7 +187,7 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_codigoTextFieldActionPerformed
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void adicionarEspecialidadeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarEspecialidadeTextFieldActionPerformed
@@ -180,7 +199,31 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_descricaoTextFieldActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
+             
+        if(operacao == OperacaoEnum.ADICIONAR){
+            adicionar();
+        }else{
+            editar();
+        }
+    }//GEN-LAST:event_buttonAdicionarActionPerformed
+      
+    private void editar(){
+        especialidade.setNome(adicionarEspecialidadeTextField.getText());
+        especialidade.setDescricao(descricaoTextField.getText());
         
+        
+        EspecialodadeDAO.atualizar(especialidade);
+        
+        JOptionPane.showMessageDialog(
+                null,
+                "Atualização completa", 
+                "Especialidade", 
+                JOptionPane.INFORMATION_MESSAGE);
+        dispose();
+    }
+    
+    private void adicionar (){
+            
            //criar um objeto especialidade
         
         Especialidade novaEspecialidade = new Especialidade();
@@ -193,50 +236,7 @@ public class EspecialidadeDialog extends javax.swing.JDialog {
                 JOptionPane.INFORMATION_MESSAGE);
         
         dispose();
-    }//GEN-LAST:event_buttonAdicionarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EspecialidadeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EspecialidadeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EspecialidadeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EspecialidadeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                EspecialidadeDialog dialog = new EspecialidadeDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
-
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adicionarEspecialidadeLabel;
     private javax.swing.JTextField adicionarEspecialidadeTextField;

@@ -83,8 +83,9 @@ public class EspecialodadeDAO {
         for(Especialidade e : especialidades){
             int i = especialidades.indexOf(e);
             dados[i][0] = e.getCodigo().toString();
-            dados[i][1] = e.getNome().toString();
-            dados[i][2] = e.getDescricao().toString();
+            dados[i][1] = e.getNome();
+            dados[i][2] = e.getDescricao();
+            i++;
         }
         
         return new DefaultTableModel(dados, titulo);
