@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package br.senai.sp.jandira.ui;
-
 import br.senai.sp.jandira.dao.EspecialodadeDAO;
+import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.awt.Toolkit;
 
 public class HomeFrame extends javax.swing.JFrame {
@@ -19,6 +19,7 @@ public class HomeFrame extends javax.swing.JFrame {
     }
     // Atributos de Classes
     PaneleEspecialidades paneleEspecialidades;
+    PanelPlanoDeSaude panelPlanoDeSaude;
     
     // constantes
     private final int POS_X = 30;
@@ -36,7 +37,7 @@ public class HomeFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         iconeAgenda = new javax.swing.JLabel();
         textoAgenda = new javax.swing.JLabel();
-        buttonPalnoDeSaude = new javax.swing.JButton();
+        buttonPlanoDeSaude = new javax.swing.JButton();
         buttonEspecialidades = new javax.swing.JButton();
         buttonPaciente = new javax.swing.JButton();
         buttonMedico = new javax.swing.JButton();
@@ -88,15 +89,15 @@ public class HomeFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 850, 100);
 
-        buttonPalnoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/plano-de-saude.png"))); // NOI18N
-        buttonPalnoDeSaude.setToolTipText("Plano de Saúde");
-        buttonPalnoDeSaude.addActionListener(new java.awt.event.ActionListener() {
+        buttonPlanoDeSaude.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/plano-de-saude.png"))); // NOI18N
+        buttonPlanoDeSaude.setToolTipText("Plano de Saúde");
+        buttonPlanoDeSaude.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPalnoDeSaudeActionPerformed(evt);
+                buttonPlanoDeSaudeActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonPalnoDeSaude);
-        buttonPalnoDeSaude.setBounds(470, 120, 80, 50);
+        getContentPane().add(buttonPlanoDeSaude);
+        buttonPlanoDeSaude.setBounds(470, 120, 80, 50);
 
         buttonEspecialidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/medicina-alternativa.png"))); // NOI18N
         buttonEspecialidades.setToolTipText("Especialiades");
@@ -225,18 +226,20 @@ public class HomeFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonSairActionPerformed
 
-    private void buttonPalnoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPalnoDeSaudeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonPalnoDeSaudeActionPerformed
+    private void buttonPlanoDeSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlanoDeSaudeActionPerformed
+        paneleEspecialidades.setVisible(false);
+        panelPlanoDeSaude.setVisible(true);
+        panelHome.setVisible(false);
+    }//GEN-LAST:event_buttonPlanoDeSaudeActionPerformed
 
     private void buttonMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonMedicoActionPerformed
 
     private void buttonEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesActionPerformed
-        
-     
+
        paneleEspecialidades.setVisible(true);
+       
        panelHome.setVisible(false);
        
     }//GEN-LAST:event_buttonEspecialidadesActionPerformed
@@ -254,7 +257,7 @@ public class HomeFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonHome;
     private javax.swing.JButton buttonMedico;
     private javax.swing.JButton buttonPaciente;
-    private javax.swing.JButton buttonPalnoDeSaude;
+    private javax.swing.JButton buttonPlanoDeSaude;
     private javax.swing.JButton buttonSair;
     private javax.swing.JLabel iconeAgenda;
     private javax.swing.JLabel jLabel1;
@@ -283,6 +286,17 @@ public class HomeFrame extends javax.swing.JFrame {
         
        getContentPane().add(paneleEspecialidades);
        paneleEspecialidades.setVisible(false);
+       
+       
+        panelPlanoDeSaude = new PanelPlanoDeSaude();
+          panelPlanoDeSaude.setBounds(
+               POS_X, 
+               POS_Y, 
+               POS_LARGURA, 
+               POS_ALTURA);
+        
+       getContentPane().add(panelPlanoDeSaude);
+       panelPlanoDeSaude.setVisible(false);
        
     }
 }

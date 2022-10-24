@@ -9,7 +9,7 @@ public class PlanoDeSaude {
 	private String numero;
 	private LocalDate validade;
         private Integer codigo;
-        private  static int contador = 01;
+        private  static int contador = 1;
 	
 	
         // Construtores da classe
@@ -54,7 +54,7 @@ public class PlanoDeSaude {
          public void gerarCodigo(){
           this.contador++;
           this.codigo = contador;
-           gerarCodigo();
+           
          }
         
      

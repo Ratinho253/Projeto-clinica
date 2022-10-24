@@ -9,7 +9,8 @@ public class TesteObjetos {
 
     public static void main(String[] args) {
         
-        System.out.println(PlanoDeSaudeDAO.getEspscialidades());
+        System.out.println(PlanoDeSaudeDAO.getTabelaPlanoDeSaude());
+       
         
   }    
 }

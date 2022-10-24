@@ -5,6 +5,7 @@ import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 
 public class PlanoDeSaudeDAO {
@@ -52,20 +53,38 @@ public class PlanoDeSaudeDAO {
     }
           
 //        Criar lista inicial de planos de saude
-              public static void criarListaDeEspecialidades() {
+              public static void criarListaDePlanos() {
         PlanoDeSaude plano1 = new PlanoDeSaude("amil", "gold", "254-27", LocalDate.of(12, Month.MARCH, 25));
-        PlanoDeSaude plano2 = new PlanoDeSaude("amil", "gold", "254-27", LocalDate.of(12, Month.MARCH, 25));
-        PlanoDeSaude plano3 = new PlanoDeSaude("amil", "gold", "254-27", LocalDate.of(12, Month.MARCH, 25));
-        PlanoDeSaude plano4 = new PlanoDeSaude("amil", "gold", "254-27", LocalDate.of(12, Month.MARCH, 25));
+        PlanoDeSaude plano2 = new PlanoDeSaude("santander", "bronze", "123-42", LocalDate.of(12, Month.MARCH, 25));
+        PlanoDeSaude plano3 = new PlanoDeSaude("bradesco", "prata", "105-67", LocalDate.of(12, Month.MARCH, 25));
+        PlanoDeSaude plano4 = new PlanoDeSaude("not", "gold", "123-09", LocalDate.of(12, Month.MARCH, 25));
        
         
         planoDeSaudes.add(plano1);
         planoDeSaudes.add(plano2);
         planoDeSaudes.add(plano3);
         planoDeSaudes.add(plano4);
-       
-        System.out.println(planoDeSaudes.size());
     }
+       public static DefaultTableModel getTabelaPlanoDeSaude (){
+    
+           System.out.println("MONTANDO DEFAUT " + planoDeSaudes.size());
+    
+           String titulo[] = {"Código", "Operadora","Categoria","numero", "validade"};
+          String[][] dados = new String[planoDeSaudes.size()][5];
+          
+            for(PlanoDeSaude e : planoDeSaudes){
+            int i = planoDeSaudes.indexOf(e);
+            dados[i][0] = e.getCodigo().toString();
+            dados[i][1] = e.getOperadora();
+            dados[i][2] = e.getCategoria();
+            dados[i][4] = e.getValidade().toString();
+            dados[i][3] = e.getNumero();
+            
+        }
+        
+        return new DefaultTableModel(dados, titulo);
+        
+}
                  
      
              

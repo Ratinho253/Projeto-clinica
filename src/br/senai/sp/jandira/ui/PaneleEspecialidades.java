@@ -24,7 +24,6 @@ public class PaneleEspecialidades extends javax.swing.JPanel {
         EspecialodadeDAO.criarListaDeEspecialidades();
 
         preencherTabela();
-
     }
 
     private int getLinha() {
@@ -132,7 +131,7 @@ public class PaneleEspecialidades extends javax.swing.JPanel {
         return codigo;
     }
 
-private void editarEspecialidade(){
+ private void editarEspecialidade(){
 
               Especialidade especialidade =  EspecialodadeDAO.getEspecialidade(getCodigo());
 
