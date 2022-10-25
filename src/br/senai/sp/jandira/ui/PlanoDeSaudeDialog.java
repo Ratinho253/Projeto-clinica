@@ -4,8 +4,12 @@
  */
 package br.senai.sp.jandira.ui;
 
+import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 import br.senai.sp.jandira.model.OperacaoEnum;
 import br.senai.sp.jandira.model.PlanoDeSaude;
+import java.time.LocalDate;
+import javax.print.attribute.DateTimeSyntax;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,8 +44,14 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         this.operacao = operacao;
         
         preencherFormulario();
-        preencherTitulo();
+        
     }
+       
+         public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
+         
     private void preencherFormulario(){
         
        
@@ -50,15 +60,14 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         textFieldOperadora.setText(planoDeSaude.getOperadora());
         textFieldCategoria.setText(planoDeSaude.getCategoria());
         textFieldCarteirinha.setText(planoDeSaude.getNumero());
-        textFieldValidade.setText(planoDeSaude.getValidade());
+        textFieldValidade.setText(planoDeSaude.getValidade().toString());
         
     }
     
     
-    public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
+    
+    
+  
 
     
     @SuppressWarnings("unchecked")
@@ -148,8 +157,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         getContentPane().add(labelOperadora);
         labelOperadora.setBounds(20, 210, 90, 20);
 
-        textFieldOperadora.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldOperadora.setForeground(new java.awt.Color(0, 0, 0));
         textFieldOperadora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldOperadoraActionPerformed(evt);
@@ -161,9 +168,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         labelcategoria.setText("Categoria");
         getContentPane().add(labelcategoria);
         labelcategoria.setBounds(300, 210, 110, 20);
-
-        textFieldCategoria.setBackground(new java.awt.Color(255, 255, 255));
-        textFieldCategoria.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(textFieldCategoria);
         textFieldCategoria.setBounds(290, 240, 190, 22);
 
@@ -173,7 +177,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         getContentPane().add(labelCarteirinha);
         labelCarteirinha.setBounds(10, 290, 160, 18);
 
-        textFieldCarteirinha.setBackground(new java.awt.Color(255, 255, 255));
         textFieldCarteirinha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldCarteirinhaActionPerformed(evt);
@@ -188,7 +191,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         getContentPane().add(labelValidade);
         labelValidade.setBounds(300, 290, 150, 16);
 
-        textFieldValidade.setBackground(new java.awt.Color(255, 255, 255));
         textFieldValidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldValidadeActionPerformed(evt);
@@ -202,6 +204,11 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         buttonExcluir.setBounds(340, 400, 75, 23);
 
         buttonSalvar.setText("Salvar");
+        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSalvarActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonSalvar);
         buttonSalvar.setBounds(450, 400, 75, 23);
         getContentPane().add(spinnerMes);
@@ -247,48 +254,52 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldOperadoraActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PlanoDeSaudeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PlanoDeSaudeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PlanoDeSaudeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PlanoDeSaudeDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
+          if(operacao == OperacaoEnum.ADICIONAR){
+            adicionar();
+        }else{
+            editar();
         }
-        //</editor-fold>
+    
+    }//GEN-LAST:event_buttonSalvarActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                PlanoDeSaudeDialog dialog = new PlanoDeSaudeDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    private void adicionar (){
+            
+           //criar um objeto especialidade
+        
+        PlanoDeSaude novoPlanoDeSaude = new PlanoDeSaude();
+        novoPlanoDeSaude.setOperador(textFieldOperadora.getText());
+        novoPlanoDeSaude.setCategoria(textFieldCategoria.getText());
+        novoPlanoDeSaude.setNumero(textFieldCarteirinha.getText());
+//        novoPlanoDeSaude.setValidade(textFieldValidade.getText().);
+       
+        
+        PlanoDeSaudeDAO.gravar(novoPlanoDeSaude);
+        JOptionPane.showMessageDialog(this, "Especialidade gravada com sucesso"
+                , "Especialidade",
+                JOptionPane.INFORMATION_MESSAGE);
+        
+        dispose();
+}
+      private void editar(){
+         planoDeSaude.setOperador(textFieldOperadora.getText());
+        planoDeSaude.setCategoria(textFieldCategoria.getText());
+        planoDeSaude.setNumero(textFieldCarteirinha.getText());
+//        planoDeSaude.setValidade(textFieldValidade.getText().);
+       
+        
+        
+        PlanoDeSaudeDAO.atualizar(planoDeSaude);
+        
+        JOptionPane.showMessageDialog(
+                null,
+                "Atualização completa", 
+                "Especialidade", 
+                JOptionPane.INFORMATION_MESSAGE);
+        dispose();
     }
-
+    
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JButton buttonSalvar;
