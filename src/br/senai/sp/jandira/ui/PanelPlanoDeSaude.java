@@ -6,6 +6,7 @@ package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 import br.senai.sp.jandira.model.OperacaoEnum;
+import br.senai.sp.jandira.model.PlanoDeSaude;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -66,9 +67,14 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
             }
         });
         add(buttonExcluirPlano);
-        buttonExcluirPlano.setBounds(550, 270, 72, 23);
+        buttonExcluirPlano.setBounds(542, 270, 80, 23);
 
         buttonEdiatrPlano.setText("Editar");
+        buttonEdiatrPlano.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEdiatrPlanoActionPerformed(evt);
+            }
+        });
         add(buttonEdiatrPlano);
         buttonEdiatrPlano.setBounds(630, 270, 75, 23);
 
@@ -113,13 +119,38 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
         Integer codigo = Integer.valueOf(codiStr);
         return codigo;
     }
+        private void editarPlanos(){
+
+           PlanoDeSaude planoDeSaude = PlanoDeSaudeDAO.getPlanoDeSaude(getCodigo());
+
+            PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null,
+                    true,
+                    planoDeSaude,
+                    OperacaoEnum.EDITAR);
+            planoDeSaudeDialog.setVisible(true);
+               preencherTabela();
+        }
     
     private void buttonAdicionarPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarPlanoActionPerformed
-        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true, OperacaoEnum.EDITAR);
+        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true, OperacaoEnum.ADICIONAR);
         planoDeSaudeDialog.setVisible(true);
         
         preencherTabela();
     }//GEN-LAST:event_buttonAdicionarPlanoActionPerformed
+
+    private void buttonEdiatrPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdiatrPlanoActionPerformed
+                  
+       if(getLinha() !=-1){
+           editarPlanos();
+       }else{
+           JOptionPane.showMessageDialog(
+                   this,
+                   "Por favor escolha uma especialidade de editação",
+                   "Especialidade",
+                   JOptionPane.WARNING_MESSAGE);
+       }
+        
+    }//GEN-LAST:event_buttonEdiatrPlanoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

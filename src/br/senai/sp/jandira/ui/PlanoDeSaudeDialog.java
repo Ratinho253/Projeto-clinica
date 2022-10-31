@@ -8,6 +8,7 @@ import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
 import br.senai.sp.jandira.model.OperacaoEnum;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.print.attribute.DateTimeSyntax;
 import javax.swing.JOptionPane;
 
@@ -23,8 +24,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     public PlanoDeSaudeDialog(
             java.awt.Frame parent, 
             boolean modal,
-            OperacaoEnum operacao
-            ) {
+            OperacaoEnum operacao) {
         
         super(parent, modal);
         initComponents();
@@ -60,7 +60,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         textFieldOperadora.setText(planoDeSaude.getOperadora());
         textFieldCategoria.setText(planoDeSaude.getCategoria());
         textFieldCarteirinha.setText(planoDeSaude.getNumero());
-        textFieldValidade.setText(planoDeSaude.getValidade().toString());
+        textFieldValidade.setText(planoDeSaude.getValidade().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         
     }
     
@@ -79,6 +79,14 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
+        labelAno = new javax.swing.JLabel();
+        spinnerAno = new javax.swing.JSpinner();
+        spinnerMes = new javax.swing.JSpinner();
+        jSpinner3 = new javax.swing.JSpinner();
+        labelMes = new javax.swing.JLabel();
+        jSpinner2 = new javax.swing.JSpinner();
+        spinnerDia = new javax.swing.JSpinner();
+        labeldia = new javax.swing.JLabel();
         inicioPanel = new javax.swing.JPanel();
         textoLabel = new javax.swing.JLabel();
         labelCodigo = new javax.swing.JLabel();
@@ -90,17 +98,9 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         labelCarteirinha = new javax.swing.JLabel();
         textFieldCarteirinha = new javax.swing.JTextField();
         labelValidade = new javax.swing.JLabel();
-        textFieldValidade = new javax.swing.JTextField();
         buttonExcluir = new javax.swing.JButton();
         buttonSalvar = new javax.swing.JButton();
-        spinnerMes = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
-        jSpinner3 = new javax.swing.JSpinner();
-        spinnerDia = new javax.swing.JSpinner();
-        spinnerAno = new javax.swing.JSpinner();
-        labelAno = new javax.swing.JLabel();
-        labeldia = new javax.swing.JLabel();
-        labelMes = new javax.swing.JLabel();
+        textFieldValidade = new javax.swing.JFormattedTextField();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,6 +121,12 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jList1);
 
         jScrollPane2.setViewportView(jTree1);
+
+        labelAno.setText("Ano");
+
+        labelMes.setText("Mes");
+
+        labeldia.setText("dia");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -191,15 +197,12 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         getContentPane().add(labelValidade);
         labelValidade.setBounds(300, 290, 150, 16);
 
-        textFieldValidade.addActionListener(new java.awt.event.ActionListener() {
+        buttonExcluir.setText("Excluir");
+        buttonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldValidadeActionPerformed(evt);
+                buttonExcluirActionPerformed(evt);
             }
         });
-        getContentPane().add(textFieldValidade);
-        textFieldValidade.setBounds(290, 310, 190, 22);
-
-        buttonExcluir.setText("Excluir");
         getContentPane().add(buttonExcluir);
         buttonExcluir.setBounds(340, 400, 75, 23);
 
@@ -211,28 +214,15 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         });
         getContentPane().add(buttonSalvar);
         buttonSalvar.setBounds(450, 400, 75, 23);
-        getContentPane().add(spinnerMes);
-        spinnerMes.setBounds(100, 390, 64, 22);
-        getContentPane().add(jSpinner2);
-        jSpinner2.setBounds(20, 390, 64, 22);
-        getContentPane().add(jSpinner3);
-        jSpinner3.setBounds(100, 390, 64, 22);
-        getContentPane().add(spinnerDia);
-        spinnerDia.setBounds(20, 390, 64, 22);
-        getContentPane().add(spinnerAno);
-        spinnerAno.setBounds(190, 390, 64, 22);
-
-        labelAno.setText("Ano");
-        getContentPane().add(labelAno);
-        labelAno.setBounds(200, 370, 37, 16);
-
-        labeldia.setText("dia");
-        getContentPane().add(labeldia);
-        labeldia.setBounds(40, 370, 16, 16);
-
-        labelMes.setText("Mes");
-        getContentPane().add(labelMes);
-        labelMes.setBounds(120, 370, 22, 16);
+        getContentPane().add(textFieldValidade);
+        textFieldValidade.setBounds(290, 310, 190, 22);
+        try{
+            textFieldValidade.setFormatterFactory(new javax.swing.text.
+                DefaultFormatterFactory(new javax.swing.text.MaskFormatter
+                    ("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         setSize(new java.awt.Dimension(564, 466));
         setLocationRelativeTo(null);
@@ -246,46 +236,59 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldCarteirinhaActionPerformed
 
-    private void textFieldValidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldValidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldValidadeActionPerformed
-
     private void textFieldOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldOperadoraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldOperadoraActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-          if(operacao == OperacaoEnum.ADICIONAR){
+          CharSequence s = " ";
+        
+        if (textFieldOperadora.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "A operadora do plano de saúde é obrigatória!");
+            textFieldOperadora.requestFocus();
+        } else if (textFieldCategoria.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "A categoria do plano de saúde é obrigatória");
+            textFieldCategoria.requestFocus();
+        } else if (textFieldCarteirinha.getText().isEmpty() == true) {
+            JOptionPane.showMessageDialog(null, "O número do plano de saúde é obrigatório");
+            textFieldCarteirinha.requestFocus();
+        } else if (textFieldValidade.getText().contains(s) == true) {
+            JOptionPane.showMessageDialog(null, "A validade do plano de saúde é obrigatória");
+            textFieldValidade.requestFocus();
+        } else if (operacao == OperacaoEnum.ADICIONAR) {
             adicionar();
-        }else{
+        } else {
             editar();
-        }
-    
+        }   
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
+    private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+        dispose();
+    }//GEN-LAST:event_buttonExcluirActionPerformed
+
     private void adicionar (){
-            
-           //criar um objeto especialidade
-        
         PlanoDeSaude novoPlanoDeSaude = new PlanoDeSaude();
-        novoPlanoDeSaude.setOperador(textFieldOperadora.getText());
+        novoPlanoDeSaude.setOperadora(textFieldOperadora.getText());
         novoPlanoDeSaude.setCategoria(textFieldCategoria.getText());
         novoPlanoDeSaude.setNumero(textFieldCarteirinha.getText());
-//        novoPlanoDeSaude.setValidade(textFieldValidade.getText().);
+        novoPlanoDeSaude.setValidade(LocalDate.parse(textFieldValidade.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
        
         
         PlanoDeSaudeDAO.gravar(novoPlanoDeSaude);
+        
         JOptionPane.showMessageDialog(this, "Especialidade gravada com sucesso"
                 , "Especialidade",
                 JOptionPane.INFORMATION_MESSAGE);
         
         dispose();
+        
 }
       private void editar(){
-         planoDeSaude.setOperador(textFieldOperadora.getText());
+          
+        planoDeSaude.setOperadora(textFieldOperadora.getText());
         planoDeSaude.setCategoria(textFieldCategoria.getText());
         planoDeSaude.setNumero(textFieldCarteirinha.getText());
-//        planoDeSaude.setValidade(textFieldValidade.getText().);
+        planoDeSaude.setValidade(LocalDate.parse(textFieldValidade.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
        
         
         
@@ -326,7 +329,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     private javax.swing.JTextField textFieldCategoria;
     private javax.swing.JTextField textFieldCodigo;
     private javax.swing.JTextField textFieldOperadora;
-    private javax.swing.JTextField textFieldValidade;
+    private javax.swing.JFormattedTextField textFieldValidade;
     private javax.swing.JLabel textoLabel;
     // End of variables declaration//GEN-END:variables
 }
