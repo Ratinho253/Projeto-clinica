@@ -1,11 +1,21 @@
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Especialidade;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EspecialodadeDAO {
+
+    private final static String URL = "C:\\Users\\22282229\\salvação\\Especialidade.txt";
+    private final static Path PATH = Paths.get(URL);
 
 //  Essa classe será responsável pela persisência de dados
 //     das especialidades, por exemplo, adicionar uma nova especialidade
@@ -14,6 +24,22 @@ public class EspecialodadeDAO {
 
     public static void gravar(Especialidade e) {
         especialidades.add(e);
+
+        // Gravar em Arquivo
+        try {
+            BufferedWriter escritor = Files.newBufferedWriter(
+                    PATH,
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.WRITE);
+
+            escritor.write(e.getEspecialidadeSeparadaPorPontoEVirgula());
+            escritor.newLine();
+            escritor.close();
+
+        } catch (IOException erro) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro");
+        }
+
     }
 
     public static ArrayList<Especialidade> getEspescialidades() {
@@ -30,7 +56,6 @@ public class EspecialodadeDAO {
             i++;
         }
     }
-    
 
     public static Especialidade getEspecialidade(Integer codigo) {
         for (Especialidade e : especialidades) {
@@ -47,7 +72,7 @@ public class EspecialodadeDAO {
     public static void excluir(Integer codigo) {
         for (Especialidade e : especialidades) {
             if (e.getCodigo() == codigo) {
-                especialidades.remove(e);          
+                especialidades.remove(e);
                 break;
             }
 
@@ -57,38 +82,52 @@ public class EspecialodadeDAO {
     //Criar lista inicial de especialidades
 
     public static void criarListaDeEspecialidades() {
-        Especialidade e1 = new Especialidade("Cardgiologia", "Cuida do coração");
-        Especialidade e2 = new Especialidade("Nefrologia", "Estuda as doencas");
-        Especialidade e3 = new Especialidade("Otorrino", "Cuida do ouvido");
-        Especialidade e4 = new Especialidade("Pediatra", "Cuida de criança");
-        
-        especialidades.add(e1);
-        especialidades.add(e2);
-        especialidades.add(e3);
-        especialidades.add(e4);
-        
-        System.out.println(especialidades.size());
-        
+
+        try {
+            BufferedReader leitor = Files.newBufferedReader(PATH);
+
+            String linha = leitor.readLine();
+
+            while (linha != null) {
+
+                // Transformar os dados da linha em uma especialidade
+                String[] vetor = linha.split(";");
+                Especialidade e = new Especialidade(
+                        vetor[1],
+                        vetor[2],
+                        Integer.valueOf(vetor[0]));
+
+                //Guardar a Especialidades
+                especialidades.add(e);
+
+                //ler a proxima linha
+                linha = leitor.readLine();
+            }
+
+            leitor.close();
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro no arquivo");
+        }
     }
-    
-    public static DefaultTableModel getTabelaEspecialidades(){
-        
+
+    public static DefaultTableModel getTabelaEspecialidades() {
+
         System.out.println("MONTANDO DEFAUT " + especialidades.size());
-        
+
         String titulo[] = {"Código", "Nome da Especialidade", "Descrição"};
         String[][] dados = new String[especialidades.size()][3];
-        
-        
-        for(Especialidade e : especialidades){
+
+        for (Especialidade e : especialidades) {
             int i = especialidades.indexOf(e);
             dados[i][0] = e.getCodigo().toString();
             dados[i][1] = e.getNome();
             dados[i][2] = e.getDescricao();
             i++;
         }
-        
+
         return new DefaultTableModel(dados, titulo);
-        
+
     }
-    
+
 }
