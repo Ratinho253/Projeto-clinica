@@ -67,7 +67,7 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
             }
         });
         add(buttonExcluirPlano);
-        buttonExcluirPlano.setBounds(542, 270, 80, 23);
+        buttonExcluirPlano.setBounds(470, 270, 80, 23);
 
         buttonEdiatrPlano.setText("Editar");
         buttonEdiatrPlano.addActionListener(new java.awt.event.ActionListener() {
@@ -76,7 +76,7 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
             }
         });
         add(buttonEdiatrPlano);
-        buttonEdiatrPlano.setBounds(630, 270, 75, 23);
+        buttonEdiatrPlano.setBounds(560, 270, 90, 23);
 
         buttonAdicionarPlano.setText("Adicionar");
         buttonAdicionarPlano.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +85,7 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
             }
         });
         add(buttonAdicionarPlano);
-        buttonAdicionarPlano.setBounds(710, 270, 81, 23);
+        buttonAdicionarPlano.setBounds(660, 270, 120, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirPlanoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirPlanoActionPerformed
@@ -119,6 +119,7 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
         Integer codigo = Integer.valueOf(codiStr);
         return codigo;
     }
+       
         private void editarPlanos(){
 
            PlanoDeSaude planoDeSaude = PlanoDeSaudeDAO.getPlanoDeSaude(getCodigo());
@@ -176,7 +177,6 @@ public class PanelPlanoDeSaude extends javax.swing.JPanel {
     tabelaPlanos
 
            .setDefaultEditor(Object.class  
-
                     , null);
     
     

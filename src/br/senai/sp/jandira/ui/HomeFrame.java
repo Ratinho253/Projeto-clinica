@@ -20,6 +20,8 @@ public class HomeFrame extends javax.swing.JFrame {
     // Atributos de Classes
     PaneleEspecialidades paneleEspecialidades;
     PanelPlanoDeSaude panelPlanoDeSaude;
+    PanelMedico panelMedico;
+    
     
     // constantes
     private final int POS_X = 30;
@@ -233,20 +235,28 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPlanoDeSaudeActionPerformed
 
     private void buttonMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicoActionPerformed
-        // TODO add your handling code here:
+        
+       panelMedico.setVisible(true);
+       paneleEspecialidades.setVisible(false);
+       panelHome.setVisible(false);
+       panelPlanoDeSaude.setVisible(false);
+      
     }//GEN-LAST:event_buttonMedicoActionPerformed
 
     private void buttonEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEspecialidadesActionPerformed
 
        paneleEspecialidades.setVisible(true);
-       
        panelHome.setVisible(false);
+       panelMedico.setVisible(false);
+       
        
     }//GEN-LAST:event_buttonEspecialidadesActionPerformed
 
     private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
+        
         paneleEspecialidades.setVisible(false);
         panelHome.setVisible(true);
+        panelMedico.setVisible(false);
     }//GEN-LAST:event_buttonHomeActionPerformed
 
     
@@ -277,6 +287,7 @@ public class HomeFrame extends javax.swing.JFrame {
 
     private void initPanels() {
         
+        //ESPECIALIDADE 
         paneleEspecialidades = new PaneleEspecialidades();
           paneleEspecialidades.setBounds(
                POS_X, 
@@ -287,7 +298,7 @@ public class HomeFrame extends javax.swing.JFrame {
        getContentPane().add(paneleEspecialidades);
        paneleEspecialidades.setVisible(false);
        
-       
+       //MEDICO
         panelPlanoDeSaude = new PanelPlanoDeSaude();
           panelPlanoDeSaude.setBounds(
                POS_X, 
@@ -297,6 +308,19 @@ public class HomeFrame extends javax.swing.JFrame {
         
        getContentPane().add(panelPlanoDeSaude);
        panelPlanoDeSaude.setVisible(false);
+       
+       
+       // MEDICO
+       panelMedico = new PanelMedico();
+          panelMedico.setBounds(
+               POS_X, 
+               POS_Y, 
+               POS_LARGURA, 
+               POS_ALTURA);
+        
+       getContentPane().add(panelMedico);
+       panelMedico.setVisible(false);
+       
        
     }
 }
