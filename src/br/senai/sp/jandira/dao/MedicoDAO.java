@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.imageio.IIOException;
@@ -20,15 +21,12 @@ import javax.swing.table.DefaultTableModel;
 public class MedicoDAO {
     
     
-    private final static String URL = "C:\\Users\\jv147\\eclipse-workspace\\projeto\\java\\Medico.txt";
-    private final static String URL_TEMP = "C:\\Users\\jv147\\eclipse-workspace\\projeto\\java\\Medico-temp.txt";
+    private final static String URL = "C:\\Users\\22282229\\salvação\\Medico.txt";
+    private final static String URL_TEMP = "C:\\Users\\22282229\\salvação\\Medico-temp.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
-    /*
-    Essa classe será responsável pela persistência de dados
-    dos planos de saude, por exemplo, adicionar um novo,
-    excluir um plano de saude, etc.
-     */
+    
+    
     
     private static ArrayList<Medico> medicos = new ArrayList<>();
     
@@ -79,7 +77,7 @@ public class MedicoDAO {
 
         }
         
-//        atualizarArquivo();
+        atualizarArquivo();
         
     }
 
@@ -140,15 +138,14 @@ public class MedicoDAO {
             while(linha !=null){
                 
                 String[] vetor = linha.split(";");
-                String[] data = vetor[5].split("-");
                 
                 Medico m = new Medico(
                         Integer.valueOf(vetor[0]),
-                        vetor[2],
-                        vetor[4],
-                        vetor[3],
                         vetor[1],
-                        LocalDate.of(Integer.parseInt(data[0]),Integer.parseInt(data[1]),Integer.parseInt(data[2])));
+                        vetor[2],
+                        vetor[3],
+                        vetor[4],
+                        LocalDate.parse(vetor[5]));
                 
                 medicos.add(m);
                 
