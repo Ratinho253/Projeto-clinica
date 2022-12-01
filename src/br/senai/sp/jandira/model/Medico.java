@@ -13,25 +13,28 @@ public class Medico {
         private LocalDate dataDeNascimento;
         private Integer codigo;
         
-        public Medico(String nome, Especialidade[] especialidades, String telefone, String email, String crm) {
+        public Medico(Integer codigo, String nome, String telefone, String email, LocalDate dataDeNascimento) {
             this.nome = nome;
-            this.especialidades = especialidades;
-            this.email = email;
             this.telefone = telefone;
+            this.email = email;
             this.crm = crm;
             
-            gerarCodigo();
-       
+            gerarCodigo(); 
         }
         
-        public Medico(String nome, String crm, String telefone, LocalDate dataDeNascimento) {
+       public Medico(Integer codigo, String nome, String telefone, String email, String crm, LocalDate dataDeNascimento) {
+            this.codigo = codigo;
             this.nome = nome;
-            this.crm = crm;
             this.telefone = telefone;
+            this.email = email;
+            this.crm = crm;
             this.dataDeNascimento = dataDeNascimento;
             
             gerarCodigo();
        
+        }
+        public Medico() {
+            gerarCodigo();
         }
 
 	public String getNome() {
@@ -73,15 +76,27 @@ public class Medico {
 	public void setEspecialidade(Especialidade[] especialidade) {
 		this.especialidades = especialidade;
 	}
-  public Integer getCodigo() {
-        return codigo;
-    }
-    
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-    private void gerarCodigo() {
-        this.contador++;
-        this.codigo = contador;
+        public Integer getCodigo() {
+                return codigo;
         }
+    
+         public void setDataDeNascimento(LocalDate dataDeNascimento) {
+		this.dataDeNascimento = dataDeNascimento;
+	}
+	public LocalDate getDataDeNascimento() {
+		return dataDeNascimento;
+	}
+        
+        public void setCodigo(Integer codigo) {
+            this.codigo = codigo;
+        }
+        private void gerarCodigo() {
+            this.contador++;
+            this.codigo = contador;
+        }
+    
+        public String getMedicoSeparadoPorPontoEVirgula() {
+            return this.codigo + ";" + this.crm + ";" + this.nome + ";" + this.email + ";" + this.telefone + ";" + this.dataDeNascimento;
+        }
+    
 }

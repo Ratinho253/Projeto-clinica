@@ -2,6 +2,8 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.MedicoDAO;
+import br.senai.sp.jandira.model.Medico;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -130,23 +132,31 @@ public class PanelMedico extends javax.swing.JPanel {
     
     private void buttonEdiatrMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdiatrMedicoActionPerformed
 
-//        if(getLinha() !=-1){
-//            editarPlanos();
-//        }else{
-//            JOptionPane.showMessageDialog(
-//                this,
-//                "Por favor escolha uma especialidade de editação",
-//                "Especialidade",
-//                JOptionPane.WARNING_MESSAGE);
-//        }
-
+    if (getLinha() != -1) {
+            editarMedico();
+        } else {
+            JOptionPane.showConfirmDialog(
+                    this,
+                    "Por favor, selecione o médico que você deseja editar.",
+                    "Médicos",
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_buttonEdiatrMedicoActionPerformed
 
+    private void editarMedico() {
+
+        Medico medico = MedicoDAO.getMedico(getCodigo());
+
+        MedicoDialog medicoDialog = new MedicoDialog(null, true, medico, OperacaoEnum.EDITAR);
+
+        medicoDialog.setVisible(true);
+        preencherTabela();
+    }
+    
     private void buttonAdicionarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarMedicoActionPerformed
-//        PlanoDeSaudeDialog planoDeSaudeDialog = new PlanoDeSaudeDialog(null, true, OperacaoEnum.ADICIONAR);
-//        planoDeSaudeDialog.setVisible(true);
-//
-//        preencherTabela();
+         MedicoDialog m = new MedicoDialog(null, true, OperacaoEnum.ADICIONAR);
+        m.setVisible(true);
+        preencherTabela();
     }//GEN-LAST:event_buttonAdicionarMedicoActionPerformed
 
 

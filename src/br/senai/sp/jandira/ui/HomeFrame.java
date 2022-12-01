@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package br.senai.sp.jandira.ui;
 import br.senai.sp.jandira.dao.EspecialodadeDAO;
 import br.senai.sp.jandira.model.PlanoDeSaude;
@@ -248,7 +244,7 @@ public class HomeFrame extends javax.swing.JFrame {
        paneleEspecialidades.setVisible(true);
        panelHome.setVisible(false);
        panelMedico.setVisible(false);
-       
+        panelPlanoDeSaude.setVisible(false);
        
     }//GEN-LAST:event_buttonEspecialidadesActionPerformed
 
@@ -257,6 +253,7 @@ public class HomeFrame extends javax.swing.JFrame {
         paneleEspecialidades.setVisible(false);
         panelHome.setVisible(true);
         panelMedico.setVisible(false);
+        panelPlanoDeSaude.setVisible(false);
     }//GEN-LAST:event_buttonHomeActionPerformed
 
     
