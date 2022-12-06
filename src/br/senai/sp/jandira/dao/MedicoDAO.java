@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.dao;
 
+import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.io.BufferedReader;
@@ -15,20 +16,37 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.imageio.IIOException;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class MedicoDAO {
     
     
-    private final static String URL = "C:\\Users\\22282229\\salvação\\Medico.txt";
-    private final static String URL_TEMP = "C:\\Users\\22282229\\salvação\\Medico-temp.txt";
+   // private final static String URL = "C:\\Users\\22282229\\salvação\\Medico.txt";
+   // private final static String URL_TEMP = "C:\\Users\\22282229\\salvação\\Medico-temp.txt";
+    private final static String URL = "E:\\documentos\\Medico.txt";
+    private final static String URL_TEMP = "E:\\documentos\\Medico-temp.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
     
     
     
     private static ArrayList<Medico> medicos = new ArrayList<>();
+    
+    public  static ArrayList<Especialidade> apenasEspecialidadeDoMedico(String linha){
+        String [] vetor = linha.split(";");
+        
+        int codigoEspecialidade = 6 ;
+        
+        ArrayList<Especialidade> codigos = new ArrayList<>();
+        while (codigoEspecialidade < vetor.length){
+            codigos.add(EspecialodadeDAO.getEspecialidade(Integer.valueOf(vetor(codigoEspecialidade))));
+            codigoEspecialidade++;
+        }
+            return codigos;
+    }
+
     
      public static void gravar(Medico m) { // CREATE
         medicos.add(m);
@@ -182,4 +200,45 @@ public class MedicoDAO {
 
         return new DefaultTableModel(dados, titulo);
     }
+    
+     public static DefaultListModel<Especialidade> getEspecialidadeDoMedicoModel(){
+         
+         DefaultListModel<Especialidade> especialidadeLista = new DefaultListModel<>();
+         try {
+              BufferedReader leitor = Files.newBufferedReader(PATH);
+              String linha = leitor.readLine();
+              
+              for(Especialidade sequenciaListaMedico : apenasEspecialidadeDoMedico(linha)){
+                  especialidadeLista.addElement(sequenciaListaMedico);
+              }
+              leitor.close();
+              
+         } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "Ocorreu  na adição da lista do médico");
+         }
+         return especialidadeLista;
+     }
+    
+    
+//        public static DefaultListModel<String> getListaMedico(){
+//        DefaultListModel<String> listaMedico = new DefaultListModel<>();
+//        
+//        for(int i = 0){
+//            
+//          listaMedico.addElement();
+//            
+//        }   
+//            
+//           return listaMedico;  
+//            
+//        
+//    }
+
+    private static String vetor(int codigoEspecialidade) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
+    
+    
  }
