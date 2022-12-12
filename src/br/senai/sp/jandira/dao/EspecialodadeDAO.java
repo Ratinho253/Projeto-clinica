@@ -16,10 +16,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class EspecialodadeDAO {
 
-   // private final static String URL = "C:\\Users\\22282229\\salvação\\Especialidade.txt";
-   // private final static String URL_TEMP = "C:\\Users\\22282229\\salvação\\Especialidade-temp.txt";
-    private final static String URL = "E:\\documentos\\Especialidade.txt";
-    private final static String URL_TEMP = "E:\\documentos\\Especialidade-temp.txt";
+    private final static String URL = "C:\\Users\\22282229\\salvação\\Especialidade.txt";
+    private final static String URL_TEMP = "C:\\Users\\22282229\\salvação\\Especialidade-temp.txt";
+//    private final static String URL = "E:\\documentos\\Especialidade.txt";
+//    private final static String URL_TEMP = "E:\\documentos\\Especialidade-temp.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
@@ -176,7 +176,9 @@ public class EspecialodadeDAO {
         DefaultListModel<String> listaEspecialidade = new  DefaultListModel<>();
         
         for(Especialidade especialidade : especialidades){
-            listaEspecialidade.addElement(especialidade.getNome());
+            listaEspecialidade.addElement(
+                    especialidade.getCodigo()
+                    +"-"+ especialidade.getNome());
         }
         
         return listaEspecialidade;

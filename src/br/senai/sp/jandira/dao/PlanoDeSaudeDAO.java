@@ -18,10 +18,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class PlanoDeSaudeDAO {
 
-    //private final static String URL = "C:\\Users\\22282229\\salvação\\PlanoDeSaude.txt";
-   // private final static String URL_TEMP = "C:\\Users\\22282229\\salvação\\PlanoDeSaude-temp.txt";
-    private final static String URL = "E:\\documentos\\Plano.txt";
-    private final static String URL_TEMP = "E:\\documentos\\Plano-temp.txt";
+    private final static String URL = "C:\\Users\\22282229\\salvação\\PlanoDeSaude.txt";
+    private final static String URL_TEMP = "C:\\Users\\22282229\\salvação\\PlanoDeSaude-temp.txt";
+//    private final static String URL = "E:\\documentos\\Plano.txt";
+//    private final static String URL_TEMP = "E:\\documentos\\Plano-temp.txt";
     private final static Path PATH = Paths.get(URL);
     private final static Path PATH_TEMP = Paths.get(URL_TEMP);
 
